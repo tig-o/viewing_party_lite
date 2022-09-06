@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       redirect_to "/users/#{user.id}"
       flash[:success] = "Welcome, #{user.name}!"
     else
-      flash[:alert] = "Error: #{error_message(user.errors)}"
+      flash[:alert] = "Error: Please try again."
       redirect_to '/register'
     end
   end

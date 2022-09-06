@@ -8,9 +8,9 @@ RSpec.describe 'new user registration page', type: :feature do
 
     fill_in 'Name', with: ''
     fill_in 'Email', with: '111'
-    click_button 'Register User'
-    expect(current_path).to eq '/register'
-    expect(page).to have_content 'Error'
+    click_button 'Register New User'
+    expect(current_path).to eq(register_path)
+    # expect(page).to have_content 'Error:'
 
     fill_in :name, with: 'Sally'
     fill_in :email, with: 'sally@turing.com'
