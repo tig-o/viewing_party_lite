@@ -9,7 +9,12 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
-    if user.save
+    # binding.pry
+    if params[:password] != params[:password_conf]
+      flash[:alert] = "Error: Mismatching passwords"
+    elsif params[:password] == nil || params[:password_conf] == nil
+      flash[:alert] = "Error: Blank password"
+    elsif user.save
       redirect_to "/users/#{user.id}"
       flash[:success] = "Welcome, #{user.name}!"
     else
