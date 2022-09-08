@@ -6,6 +6,9 @@
 <p>OR</p>
 
 <%= link_to 'Log In', login_path %>
+<%= link_to 'Log Out', '/logout', method: :delete %>
+
+#need to finsih and include log out logic to find if current user is logged in first.
 
 <% @users.each do |user| %>
 <%= link_to user.name, user_path(user) %>
