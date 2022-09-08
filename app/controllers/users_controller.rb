@@ -16,8 +16,9 @@ class UsersController < ApplicationController
     elsif params[:password] == nil || params[:password_conf] == nil
       flash[:alert] = "Error: Blank password"
     elsif user.save
-      redirect_to "/users/#{user.id}"
-      flash[:success] = "Welcome, #{user.name}!"
+      session[:user_id] = current_user.id
+      redirect_to "/users/#{current_user.id}"
+      flash[:success] = "Welcome, #{current_user.name}!"
     else
       flash[:alert] = "Error: Please try again."
       redirect_to '/register'
@@ -28,7 +29,7 @@ class UsersController < ApplicationController
 
   def login_user
     user = User.find_by(email: params[:email])
-    if user.authenticate(params[:password])
+    if user&.authenticate(params[:password])
       session[:user_id] = user.id
     else
       flash[:error] = 'Error: Try again.'
